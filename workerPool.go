@@ -5,15 +5,18 @@ import (
 	"sync"
 )
 
+// Job needs to implement Do method.
 type Job interface {
 	Do(ctx context.Context) error
 }
 
+// JobFunc low level task to perform by each worker.
 type JobFunc struct {
 	f        func(context.Context) error
 	executer []func()
 }
 
+// WorkerPool 
 type Workerpool struct {
 	ctx  context.Context
 	jobs chan Job
@@ -21,6 +24,7 @@ type Workerpool struct {
 	wg   sync.WaitGroup
 }
 
+//NewWorkerPool Factory of workers
 func NewWorkerPool(ctx context.Context, wn int) *Workerpool {
 	pool := &Workerpool{
 		ctx:  ctx,
