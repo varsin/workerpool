@@ -24,7 +24,7 @@ type Workerpool struct {
 	wg   sync.WaitGroup
 }
 
-//NewWorkerPool Factory of workers
+// NewWorkerPool Factory of workers
 func NewWorkerPool(ctx context.Context, wn int) *Workerpool {
 	pool := &Workerpool{
 		ctx:  ctx,
